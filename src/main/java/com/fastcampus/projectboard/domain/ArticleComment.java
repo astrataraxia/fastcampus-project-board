@@ -20,7 +20,6 @@ import java.util.Objects;
         @Index(columnList = "createdBy")
 })
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@EntityListeners(AuditingEntityListener.class)
 @Entity
 public class ArticleComment extends AuditingFields {
 
