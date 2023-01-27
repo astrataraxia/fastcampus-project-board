@@ -22,10 +22,3 @@ spring:
       hibernate.default_batch_fetch_size: 100
   h2.console.enabled: true
   sql.init.mode: always
-
-
----
-
-spring:
-  config.activate.on-profile: testdb
-#  datasource.url: jdbc:h2:mem:testdb
