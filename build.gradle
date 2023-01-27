@@ -32,9 +32,31 @@ dependencies {
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	//queryDsl 설정
+	implementation 'com.querydsl:querydsl-jpa'
+	implementation 'com.querydsl:querydsl-core'
+	implementation 'com.querydsl:querydsl-collections'
+	annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jpa"
+	annotationProcessor "jakarta.annotation:jakarta.annotation-api"
+	annotationProcessor "jakarta.persistence:jakarta.persistence-api"
+
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
 targetCompatibility = JavaVersion.VERSION_17
+
+//queryDsl 설정
+tasks.withType(JavaCompile) {
+	options.getGeneratedSourceOutputDirectory().set(file('src/main/generated'))
+}
+
+sourceSets {
+	main.java.srcDirs +=  ['src/main/generated']
+}
+clean {
+	delete file('src/main/generated')
+}
