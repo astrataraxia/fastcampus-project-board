@@ -11,16 +11,15 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 
 @DisplayName("view 컨트롤러 - 인증")
 @Import(SecurityConfig.class)
 @WebMvcTest
-public class AuthController {
+public class AuthControllerTest {
 
     private final MockMvc mvc;
 
-    public AuthController(@Autowired MockMvc mvc) {
+    public AuthControllerTest(@Autowired MockMvc mvc) {
         this.mvc=mvc;
     }
 
