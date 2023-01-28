@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+
 @DisplayName("View - 컨트롤러 게시글")
 @WebMvcTest(ArticleController.class)
 class ArticleControllerTest {
@@ -22,7 +23,7 @@ class ArticleControllerTest {
         this.mvc=mvc;
     }
 
-    @Disabled
+
     @Test
     @DisplayName("[view][GET] 게시글 리스트(게시판) 페이지 - 정상 호출")
     void givenNothing_whenRequestingArticlesView_thenReturnsArticlesView() throws Exception {
@@ -35,7 +36,6 @@ class ArticleControllerTest {
                 .andExpect(model().attributeExists("articles"));
     }
 
-    @Disabled
     @Test
     @DisplayName("[view][GET] 게시글 상세 페이지 - 정상 호출")
     void givenNothing_whenRequestingArticleView_thenReturnsArticleView() throws Exception {
