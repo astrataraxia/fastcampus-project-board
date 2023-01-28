@@ -11,18 +11,24 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Service
-@Transactional(readOnly = true)
+@Transactional
 public class ArticleCommentService {
 
     private final ArticleCommentRepository articleCommentRepository;
     private final ArticleRepository articleRepository;
 
-
-    public List<ArticleCommentDto> searchArticleComment(long l) {
+    @Transactional(readOnly = true)
+    public List<ArticleCommentDto> searchArticleComments(long articleId) {
         return List.of();
     }
 
-    public void saveArticleComment(ArticleCommentDto dtd) {
-
+    public void saveArticleComment(ArticleCommentDto dto) {
     }
+
+    public void updateArticleComment(ArticleCommentDto dto) {
+    }
+
+    public void deleteArticleComment(Long articleCommentId) {
+    }
+
 }

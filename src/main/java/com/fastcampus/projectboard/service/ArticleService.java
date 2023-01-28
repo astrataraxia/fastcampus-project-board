@@ -4,36 +4,38 @@ package com.fastcampus.projectboard.service;
 import com.fastcampus.projectboard.domain.type.SearchType;
 import com.fastcampus.projectboard.dto.ArticleDto;
 import com.fastcampus.projectboard.dto.ArticleUpdateDto;
+import com.fastcampus.projectboard.dto.ArticleWithCommentsDto;
 import com.fastcampus.projectboard.repository.ArticleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
+@Transactional
 public class ArticleService {
 
     private final ArticleRepository articleRepository;
 
-    public Page<ArticleDto> searchArticles(SearchType title, String searchKeyword) {
+    @Transactional(readOnly = true)
+    public Page<ArticleDto> searchArticles(SearchType searchType, String searchKeyword, Pageable pageable) {
         return Page.empty();
     }
 
-    public ArticleDto searchArticle(long l) {
+    @Transactional(readOnly = true)
+    public ArticleWithCommentsDto getArticle(Long articleId) {
         return null;
     }
 
-    @Transactional
     public void saveArticle(ArticleDto dto) {
     }
 
-    @Transactional
-    public void updateArticle(long articleId, ArticleUpdateDto dto) {
+    public void updateArticle(ArticleDto dto) {
     }
 
-    @Transactional
     public void deleteArticle(long articleId) {
     }
+
 }
