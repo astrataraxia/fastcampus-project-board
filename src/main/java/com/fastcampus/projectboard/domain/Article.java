@@ -18,7 +18,6 @@ import java.util.Set;
         @Index(columnList = "createdAt"),
         @Index(columnList = "createdBy")
 })
-
 @Entity
 public class Article extends  AuditingFields{
 
@@ -31,13 +30,10 @@ public class Article extends  AuditingFields{
 
     @Setter private String hashtag;  //해시테그
 
-
     @ToString.Exclude
     @OrderBy("createdAt DESC")
     @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
     private final Set<ArticleComment> articleComments = new LinkedHashSet<>();
-
-
 
     protected Article() {
     }
