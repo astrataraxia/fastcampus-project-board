@@ -1,19 +1,19 @@
 package com.fastcampus.projectboard.domain;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Objects;
 
-
 @Getter
 @ToString(callSuper = true)
-@Table(indexes= {
+@Table(indexes = {
         @Index(columnList = "content"),
         @Index(columnList = "createdAt"),
         @Index(columnList = "createdBy")
 })
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class ArticleComment extends AuditingFields {
 
@@ -21,10 +21,10 @@ public class ArticleComment extends AuditingFields {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(optional = false) @Setter private Article article;  //게시글  ID
+    @Setter @ManyToOne(optional = false) private Article article; // 게시글 (ID)
     @Setter @ManyToOne(optional = false) @JoinColumn(name = "userId") private UserAccount userAccount; // 유저 정보 (ID)
-    @Setter @Column(nullable = false, length = 500) private String content;  // 본문
-
+    @Setter @Column(nullable = false, length = 500) private String content; // 본문
+    protected ArticleComment() {}
     private ArticleComment(Article article, UserAccount userAccount, String content) {
         this.article = article;
         this.userAccount = userAccount;

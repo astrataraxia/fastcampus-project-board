@@ -12,7 +12,7 @@ public record ArticleResponse(
         LocalDateTime createdAt,
         String email,
         String nickname
-)  {
+) {
 
     public static ArticleResponse of(Long id, String title, String content, String hashtag, LocalDateTime createdAt, String email, String nickname) {
         return new ArticleResponse(id, title, content, hashtag, createdAt, email, nickname);
