@@ -3,6 +3,12 @@
     <attr sel="#header" th:replace="header :: header"/>
     <attr sel="#footer" th:replace="footer :: footer"/>
 
+    <attr sel="#article-buttons">
+        <attr sel="#delete-article-form" th:action="'/articles/' + *{id} + '/delete'" th:method="post">
+            <attr sel="#update-article" th:href="'/articles/' + *{id} + '/form'" />
+        </attr>
+    </attr>
+
     <attr sel="#article-main" th:object="${article}">
         <attr sel="#article-header/h1" th:text="*{title}" />
         <attr sel="#nickname" th:text="*{nickname}" />
