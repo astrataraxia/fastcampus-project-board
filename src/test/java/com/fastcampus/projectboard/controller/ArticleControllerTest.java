@@ -1,11 +1,11 @@
 package com.fastcampus.projectboard.controller;
 
-import com.fastcampus.projectboard.config.SecurityConfig;
 import com.fastcampus.projectboard.config.TestSecurityConfig;
 import com.fastcampus.projectboard.domain.constant.FormStatus;
 import com.fastcampus.projectboard.domain.constant.SearchType;
 import com.fastcampus.projectboard.dto.ArticleDto;
 import com.fastcampus.projectboard.dto.ArticleWithCommentsDto;
+import com.fastcampus.projectboard.dto.HashtagDto;
 import com.fastcampus.projectboard.dto.UserAccountDto;
 import com.fastcampus.projectboard.dto.request.ArticleRequest;
 import com.fastcampus.projectboard.dto.response.ArticleResponse;
@@ -74,7 +74,8 @@ class ArticleControllerTest {
                 .andExpect(view().name("articles/index"))
                 .andExpect(model().attributeExists("articles"))
                 .andExpect(model().attributeExists("paginationBarNumbers"))
-                .andExpect(model().attributeExists("searchTypes"));
+                .andExpect(model().attributeExists("searchTypes"))
+                .andExpect(model().attribute("searchTypeHashtag", SearchType.HASHTAG));
         then(articleService).should().searchArticles(eq(null), eq(null), any(Pageable.class));
         then(paginationService).should().getPaginationBarNumbers(anyInt(), anyInt());
     }
@@ -116,7 +117,7 @@ class ArticleControllerTest {
         given(paginationService.getPaginationBarNumbers(pageable.getPageNumber(), Page.empty().getTotalPages())).willReturn(barNumbers);
 
         // When & Then
-        mvc.perform(get("/articles")
+        mvc.perform( get("/articles")
                         .queryParam("page", String.valueOf(pageNumber))
                         .queryParam("size", String.valueOf(pageSize))
                         .queryParam("sort", sortName + "," + direction)
@@ -162,7 +163,8 @@ class ArticleControllerTest {
                 .andExpect(model().attributeExists("article"))
                 .andExpect(model().attributeExists("articleComments"))
                 .andExpect(model().attributeExists("articleComments"))
-                .andExpect(model().attribute("totalCount", totalCount));
+                .andExpect(model().attribute("totalCount", totalCount))
+                .andExpect(model().attribute("searchTypeHashtag", SearchType.HASHTAG));
         then(articleService).should().getArticleWithComments(articleId);
         then(articleService).should().getArticleCount();
     }
@@ -248,7 +250,7 @@ class ArticleControllerTest {
     @Test
     void givenNewArticleInfo_whenRequesting_thenSavesNewArticle() throws Exception {
         // Given
-        ArticleRequest articleRequest = ArticleRequest.of("new title", "new content", "#new");
+        ArticleRequest articleRequest = ArticleRequest.of("new title", "new content");
         willDoNothing().given(articleService).saveArticle(any(ArticleDto.class));
 
         // When & Then
@@ -279,7 +281,7 @@ class ArticleControllerTest {
     @WithMockUser
     @DisplayName("[view][GET] 게시글 수정 페이지 - 정상 호출, 인증된 사용자")
     @Test
-    void givenNothing_whenRequesting_thenReturnsUpdatedArticlePage() throws Exception {
+    void givenAuthorizedUser_whenRequesting_thenReturnsUpdatedArticlePage() throws Exception {
         // Given
         long articleId = 1L;
         ArticleDto dto = createArticleDto();
@@ -301,7 +303,7 @@ class ArticleControllerTest {
     void givenUpdatedArticleInfo_whenRequesting_thenUpdatesNewArticle() throws Exception {
         // Given
         long articleId = 1L;
-        ArticleRequest articleRequest = ArticleRequest.of("new title", "new content", "#new");
+        ArticleRequest articleRequest = ArticleRequest.of("new title", "new content");
         willDoNothing().given(articleService).updateArticle(eq(articleId), any(ArticleDto.class));
 
         // When & Then
@@ -342,7 +344,7 @@ class ArticleControllerTest {
                 createUserAccountDto(),
                 "title",
                 "content",
-                "#java"
+                Set.of(HashtagDto.of("java"))
         );
     }
 
@@ -353,7 +355,7 @@ class ArticleControllerTest {
                 Set.of(),
                 "title",
                 "content",
-                "#java",
+                Set.of(HashtagDto.of("java")),
                 LocalDateTime.now(),
                 "uno",
                 LocalDateTime.now(),
