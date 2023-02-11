@@ -4,6 +4,7 @@
 
 이 서비스는 [패스트캠퍼스](https://fastcampus.co.kr/)의 [10개 프로젝트로 완성하는 백엔드 웹개발(Java/Spring) 초격차 패키지 Online](https://fastcampus.co.kr/dev_online_befinal) 강의의 강의용 프로젝트로 사용되었습니다.
 
+[![GitKraken shield](https://img.shields.io/badge/GitKraken-Legendary%20Git%20Tools-teal?style=plastic&logo=gitkraken)](https://gitkraken.link/uno)
 ## 개발 환경
 
 * Intellij IDEA Ultimate 2022.3.2
