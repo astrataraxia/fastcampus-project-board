@@ -24,6 +24,12 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 
+	//springdoc
+	implementation 'org.springdoc:springdoc-openapi-ui:1.6.14'
+	implementation 'org.springdoc:springdoc-openapi-javadoc:1.6.14'
+	annotationProcessor 'com.github.therapi:therapi-runtime-javadoc-scribe:0.15.0'
+//	implementation 'org.springdoc:springdoc-openapi-data-rest:1.6.14'
+
 	//thymeleaf와 security적용시...
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 
